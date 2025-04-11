@@ -7,24 +7,27 @@ import Contact from "./Contact";
 import Recomended from "./Recomended";
 import Featured from "./Featured";
 import Testimonials from "./Testimonials";
-
+import { Helmet } from "react-helmet-async";
 const Home = () => {
   return (
     <div className="">
+      <Helmet>
+        <title>Home | Bistro Boss</title>
+      </Helmet>
       <Banner />
-      <div className="my-20 max-w-7xl mx-auto">
+      <div className="md:my-20 my-10 max-w-7xl mx-auto">
         <Category />
       </div>
       <div className="max-w-7xl mx-auto">
         <Service />
       </div>
-      <div className="my-20 max-w-7xl mx-auto">
+      <div className="md:my-20 my-10 max-w-7xl mx-auto">
         <PopularMenu />
       </div>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto mt-4">
         <Contact />
       </div>
-      <div className="max-w-7xl mx-auto my-20">
+      <div className="max-w-7xl mx-auto md:my-20 my-10">
         <Recomended />
       </div>
       <Featured />

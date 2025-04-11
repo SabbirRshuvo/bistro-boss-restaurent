@@ -6,7 +6,7 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <Link>Home</Link>
+        <Link to="/">Home</Link>
       </li>
       <li>
         <Link>Contact us</Link>
@@ -15,7 +15,7 @@ const Navbar = () => {
         <Link>Dashboard</Link>
       </li>
       <li>
-        <Link>Our Menu</Link>
+        <Link to="/menu">Our Menu</Link>
       </li>
       <li>
         <Link>Our Shop</Link>
@@ -50,7 +50,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow items-center"
+            className="menu menu-sm dropdown-content  rounded-box z-1 mt-3 w-52 p-2 shadow items-center bg-white text-black "
           >
             {links}
           </ul>

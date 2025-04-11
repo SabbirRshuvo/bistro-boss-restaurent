@@ -10,17 +10,21 @@ const Recomended = () => {
         subHeading={"---Should Try---"}
         heading={"chef recommends "}
       />
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
         {/* card 1 */}
-        <div className="card bg-base-100 w-96 shadow-sm border">
+        <div className="card w-full max-w-sm mx-auto bg-base-100 shadow-sm border">
           <figure>
-            <img src={saladbg} alt="salad" />
+            <img
+              src={saladbg}
+              alt="salad"
+              className="w-full h-60 object-cover"
+            />
           </figure>
           <div className="card-body items-center text-center">
             <h2 className="card-title text-xl uppercase">Salad</h2>
             <p className="text-sm opacity-90">
-              Salad is the best testing vagetable in this restarurent.If you
-              want to test it, i can provide you
+              Salad is the best testing vegetable in this restaurant. If you
+              want to test it, I can provide you.
             </p>
             <div className="card-actions justify-center">
               <button className="btn border-0 border-b-2 border-yellow-400 text-white btn-outline">
@@ -29,9 +33,9 @@ const Recomended = () => {
             </div>
           </div>
         </div>
-        <div className="card bg-base-100 w-96 shadow-sm border">
+        <div className="card bg-base-100 w-full max-w-sm mx-auto shadow-sm border">
           <figure>
-            <img src={pizza} alt="salad" />
+            <img className="w-full h-60 object-cover" src={pizza} alt="salad" />
           </figure>
           <div className="card-body items-center text-center">
             <h2 className="card-title text-xl uppercase">Pizza</h2>
@@ -46,9 +50,9 @@ const Recomended = () => {
             </div>
           </div>
         </div>
-        <div className="card bg-base-100 w-96 shadow-sm border">
+        <div className="card bg-base-100 w-full shadow-sm max-w-sm mx-auto border">
           <figure>
-            <img src={soup} alt="salad" />
+            <img src={soup} className="w-full h-60 object-cover" alt="salad" />
           </figure>
           <div className="card-body items-center text-center">
             <h2 className="card-title text-xl uppercase">Soup</h2>
