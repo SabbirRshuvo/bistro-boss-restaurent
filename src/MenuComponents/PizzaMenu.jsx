@@ -7,7 +7,7 @@ const PizzaMenu = () => {
   const pizzaMenu = menu.filter((item) => item.category === "pizza");
   return (
     <div className="my-6 md:my-12">
-      <div className="w-full relative h-[500px] overflow-hidden justify-center flex items-center">
+      <div className="w-full relative h-[500px] overflow-hidden justify-center flex items-center text-white">
         <img
           src={pizzaImg}
           className="absolute w-full h-full object-cover"

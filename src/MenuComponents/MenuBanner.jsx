@@ -2,7 +2,7 @@ import React from "react";
 import bannerImage from "../assets/menu/banner3.jpg";
 const MenuBanner = () => {
   return (
-    <div className="relative w-full  h-[600px] flex  overflow-hidden justify-center items-center">
+    <div className="relative w-full  h-[600px] flex  overflow-hidden justify-center items-center text-white">
       <img
         src={bannerImage}
         className="w-full h-full absolute object-cover inset-0"

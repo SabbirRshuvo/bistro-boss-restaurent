@@ -7,13 +7,9 @@ import Contact from "./Contact";
 import Recomended from "./Recomended";
 import Featured from "./Featured";
 import Testimonials from "./Testimonials";
-import { Helmet } from "react-helmet-async";
 const Home = () => {
   return (
     <div className="">
-      <Helmet>
-        <title>Home | Bistro Boss</title>
-      </Helmet>
       <Banner />
       <div className="md:my-20 my-10 max-w-7xl mx-auto">
         <Category />

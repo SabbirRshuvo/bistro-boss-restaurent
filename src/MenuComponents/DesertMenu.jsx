@@ -13,7 +13,7 @@ const DesertMenu = () => {
           className="absolute w-full h-full object-cover"
           alt=""
         />
-        <div className="relative text-center items-center justify-center flex w-4/5 h-1/3 bg-black/40 flex-col">
+        <div className="relative text-center items-center justify-center flex w-4/5 h-1/3 bg-black/40 flex-col text-white">
           <h2 className="text-3xl uppercase font-thin md:text-2xl ">Desert</h2>
           <p className="text-sm opacity-90">
             A desert is a vast area of dry, barren land. Deserts are either hot

@@ -7,7 +7,7 @@ const SoupMenu = () => {
   const soupMenu = menu.filter((item) => item.category === "soup");
   return (
     <div className="my-6 md:my-12">
-      <div className="w-full relative h-[500px] overflow-hidden justify-center flex items-center">
+      <div className="w-full relative h-[500px] overflow-hidden justify-center flex items-center text-white">
         <img
           src={soupImg}
           className="absolute w-full h-full object-cover"

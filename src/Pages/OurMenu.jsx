@@ -1,5 +1,4 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
 import MenuBanner from "../MenuComponents/MenuBanner";
 import OfferedMenu from "../MenuComponents/OfferedMenu";
 import DesertMenu from "../MenuComponents/DesertMenu";
@@ -10,9 +9,6 @@ import PizzaMenu from "../MenuComponents/PizzaMenu";
 const OurMenu = () => {
   return (
     <div>
-      <Helmet>
-        <title>Menu| Bistro Boss</title>
-      </Helmet>
       <MenuBanner />
       <OfferedMenu />
       <DesertMenu />
