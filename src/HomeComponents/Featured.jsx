@@ -5,9 +5,9 @@ const Featured = () => {
   return (
     <>
       <div>
-        <div className="relative w-full h-[500px] overflow-hidden  ">
+        <div className="relative w-full h-[500px] overflow-hidden my-5 md:my-10  ">
           <img
-            className="absolute inset-0  w-full h-full object-cover bg-black/40 "
+            className="absolute inset-0  w-full h-full object-cover  blur-sm bg-black/40 "
             src={featuedImg}
             alt=""
           />
@@ -25,7 +25,7 @@ const Featured = () => {
                 className="w-full h-full object-cover rounded-lg shadow-md"
               />
             </div>
-            <div className="w-full md:w-1/2 text-slate-200 text-center md:text-left space-y-2 mx-auto">
+            <div className="w-full md:w-1/2 text-white text-center md:text-left space-y-2 mx-auto">
               <h1 className="text-xl  font-thin uppercase">march 20, 2025!</h1>
               <h2 className="text-xl font-thin uppercase">
                 where can i get some?

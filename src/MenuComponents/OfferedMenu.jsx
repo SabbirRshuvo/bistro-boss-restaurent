@@ -2,6 +2,7 @@ import React from "react";
 import SheardTitle from "../Sheared/SheardTitle";
 import UseMenu from "../hooks/UseMenu";
 import MenuItem from "../Sheared/MenuItem";
+import { Link } from "react-router";
 
 const OfferedMenu = () => {
   const [menu] = UseMenu();
@@ -18,9 +19,12 @@ const OfferedMenu = () => {
         </div>
       </div>
       <div className="mt-16 items-center text-center justify-center">
-        <button className="btn btn-outline border-0 border-b-2 border-yellow-500 bg-white text-black uppercase">
+        <Link
+          to="/our_shop"
+          className="btn btn-outline border-0 border-b-2 border-yellow-500  text-black uppercase"
+        >
           order your favourite food
-        </button>
+        </Link>
       </div>
     </div>
   );

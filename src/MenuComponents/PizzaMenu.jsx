@@ -2,6 +2,7 @@ import React from "react";
 import UseMenu from "../hooks/UseMenu";
 import MenuItem from "../Sheared/MenuItem";
 import pizzaImg from "../assets/menu/pizza-bg.jpg";
+import { Link } from "react-router";
 const PizzaMenu = () => {
   const [menu] = UseMenu();
   const pizzaMenu = menu.filter((item) => item.category === "pizza");
@@ -31,9 +32,12 @@ const PizzaMenu = () => {
           </div>
         </div>
         <div className="mt-16 items-center text-center justify-center">
-          <button className="btn btn-outline border-0 border-b-2 border-yellow-500 bg-white text-black uppercase">
+          <Link
+            to="/our_shop"
+            className="btn btn-outline border-0 border-b-2 border-yellow-500  text-black uppercase"
+          >
             order your favourite food
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Contact = () => {
+const ConnectNum = () => {
   return (
     <div>
       <div className="bg-black py-20 text-center">
@@ -10,4 +10,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ConnectNum;

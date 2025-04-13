@@ -27,7 +27,7 @@ const Recomended = () => {
               want to test it, I can provide you.
             </p>
             <div className="card-actions justify-center">
-              <button className="btn border-0 border-b-2 border-yellow-400 text-white btn-outline">
+              <button className="btn border-0 border-b-2 border-yellow-400 text-black btn-outline">
                 Add to cart
               </button>
             </div>
@@ -44,7 +44,7 @@ const Recomended = () => {
               test it, i can provide you
             </p>
             <div className="card-actions justify-center">
-              <button className="btn btn-outline border-0 border-b-2 border-yellow-400 text-white">
+              <button className="btn btn-outline border-0 border-b-2 border-yellow-400 text-black">
                 Add to cart
               </button>
             </div>
@@ -61,7 +61,7 @@ const Recomended = () => {
               test it, i can provide you
             </p>
             <div className="card-actions justify-center">
-              <button className="btn border-0 border-b-2 border-yellow-400 text-white btn-outline">
+              <button className="btn border-0 border-b-2 border-yellow-400 text-black btn-outline">
                 Add to cart
               </button>
             </div>
