@@ -4,6 +4,8 @@ import OurMenu from "../Pages/OurMenu";
 import Home from "../Pages/Home";
 import OurShop from "../Pages/OurShop";
 import ContactUs from "../Pages/ContactUs";
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
 
 const routes = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const routes = createBrowserRouter([
       {
         path: "/contact-us",
         element: <ContactUs />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
     ],
   },
