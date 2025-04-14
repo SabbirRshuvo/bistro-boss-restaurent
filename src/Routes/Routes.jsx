@@ -6,6 +6,8 @@ import OurShop from "../Pages/OurShop";
 import ContactUs from "../Pages/ContactUs";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Secret from "../PrivateRoute/Secret";
 
 const routes = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ const routes = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/secret",
+        element: (
+          <PrivateRoute>
+            <Secret />
+          </PrivateRoute>
+        ),
       },
     ],
   },

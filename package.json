@@ -20,6 +20,7 @@
     "react-paginate": "^8.3.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router": "^7.5.0",
+    "react-simple-captcha": "^9.3.1",
     "react-tabs": "^6.1.0",
     "swiper": "^11.2.6",
     "tailwindcss": "^4.1.3"
