@@ -5,8 +5,10 @@ import { FaCartFlatbed } from "react-icons/fa6";
 import { IoMdMenu } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
 import { NavLink, Outlet } from "react-router";
+import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
+  const [cart] = useCart();
   return (
     <div className="min-h-screen flex justify-center">
       <div className="w-64  bg-orange-300 min-h-screen ">
@@ -22,37 +24,60 @@ const Dashboard = () => {
           <ul className=" flex flex-col  my-4 space-y-2 ">
             <li>
               <NavLink
-                className="flex items-center gap-2 font-semibold uppercase btn btn-outline "
-                to="/dashboar/cart"
+                to="/"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 font-semibold uppercase btn btn-outline ${
+                    isActive ? "bg-blue-600 text-white" : ""
+                  }`
+                }
               >
                 <FaHome /> User Home
               </NavLink>
             </li>
             <li>
-              <NavLink className="flex items-center gap-2 font-semibold uppercase btn btn-outline">
-                {" "}
+              <NavLink
+                to="/reservation"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 font-semibold uppercase btn btn-outline ${
+                    isActive ? "bg-blue-600 text-white" : ""
+                  }`
+                }
+              >
                 <FaTable /> reservation
               </NavLink>
             </li>
             <li>
-              <NavLink className="flex items-center gap-2 font-semibold uppercase btn btn-outline">
-                {" "}
+              <NavLink
+                to="/payment"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 font-semibold uppercase btn btn-outline ${
+                    isActive ? "bg-blue-600 text-white" : ""
+                  }`
+                }
+              >
                 <FaHistory /> payment history
               </NavLink>
             </li>
             <li>
               <NavLink
                 to="/dashboard/cart"
-                className="flex items-center gap-2 font-semibold uppercase btn btn-outline"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 font-semibold uppercase btn btn-outline ${
+                    isActive ? "bg-blue-600 text-white" : ""
+                  }`
+                }
               >
-                {" "}
-                <FaCartFlatbed /> my cart
+                <FaCartFlatbed /> my cart ({cart.length})
               </NavLink>
             </li>
             <li>
               <NavLink
-                className="flex items-center gap-2 font-semibold uppercase btn btn-outline"
-                to="/cart"
+                to="/review"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 font-semibold uppercase btn btn-outline ${
+                    isActive ? "bg-blue-600 text-white" : ""
+                  }`
+                }
               >
                 {" "}
                 <FaCrown /> add review
@@ -60,8 +85,12 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink
-                className="flex items-center gap-2 font-semibold uppercase btn btn-outline"
-                to="/cart"
+                to="/booking"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 font-semibold uppercase btn btn-outline ${
+                    isActive ? "bg-blue-600 text-white" : ""
+                  }`
+                }
               >
                 {" "}
                 <FaBook /> my booking
@@ -70,8 +99,12 @@ const Dashboard = () => {
             <div className="divider"></div>
             <li>
               <NavLink
-                className="flex items-center gap-2 font-semibold uppercase btn btn-outline"
-                to="/cart"
+                to="/"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 font-semibold uppercase btn btn-outline ${
+                    isActive ? "bg-blue-600 text-white" : ""
+                  }`
+                }
               >
                 {" "}
                 <FaHome /> Home
@@ -79,8 +112,12 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink
-                className="flex items-center gap-2 font-semibold uppercase btn btn-outline"
-                to="/cart"
+                to="/menu"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 font-semibold uppercase btn btn-outline ${
+                    isActive ? "bg-blue-600 text-white" : ""
+                  }`
+                }
               >
                 {" "}
                 <IoMdMenu /> Menu
@@ -88,8 +125,12 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink
-                className="flex items-center gap-2 font-semibold uppercase btn btn-outline"
-                to="/cart"
+                to="/shop"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 font-semibold uppercase btn btn-outline ${
+                    isActive ? "bg-blue-600 text-white" : ""
+                  }`
+                }
               >
                 {" "}
                 <CiShop />
@@ -98,8 +139,12 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink
-                className="flex items-center gap-2 font-semibold uppercase btn btn-outline"
-                to="/cart"
+                to="/contact"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 font-semibold uppercase btn btn-outline ${
+                    isActive ? "bg-blue-600 text-white" : ""
+                  }`
+                }
               >
                 {" "}
                 <MdEmail /> Contact
