@@ -1,8 +1,7 @@
 import React from "react";
-import ContactBanner from "../ContactComponent/ContactBanner";
-import ContactAdress from "../ContactComponent/ContactAdress";
-import ContactForm from "../ContactComponent/ContactForm";
-
+import ContactBanner from "../../ContactComponent/ContactBanner";
+import ContactAdress from "../../ContactComponent/ContactAdress";
+import ContactForm from "../../ContactComponent/ContactForm";
 const ContactUs = () => {
   return (
     <div>

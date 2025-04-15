@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
-import bg from "../assets/others/authentication2.png";
-import { AuthContext } from "../Provider/AuthProvider";
+import bg from "../../assets/others/authentication2.png";
+import { AuthContext } from "../../Provider/AuthProvider";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
+import Swal from "sweetalert2";
 const Register = () => {
   const { createUser, signInWithGoogle, updateUserProfile } =
     useContext(AuthContext);
@@ -19,13 +20,21 @@ const Register = () => {
       .then((result) => {
         const userData = result.user;
         updateUserProfile(data.name, data.photoURL).then(() => {
-          console.log("profile update");
+          Swal.fire({
+            title: "Successfully Sign Up!!",
+            icon: "success",
+            draggable: true,
+          });
         });
         console.log(userData);
         navigate("/");
       })
       .catch((error) => {
-        console.log("error", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       });
   };
 

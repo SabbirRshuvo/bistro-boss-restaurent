@@ -2,8 +2,16 @@ import React, { use, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import useCart from "../hooks/useCart";
 
 const ShopCategory = () => {
+  const axiosSecure = useAxiosSecure();
+  const [, refetch] = useCart();
+  const { user } = useAuth();
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -12,6 +20,9 @@ const ShopCategory = () => {
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 6;
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     fetch("http://localhost:3000/menu")
@@ -44,6 +55,46 @@ const ShopCategory = () => {
       (event.selected * itemsPerPage) %
       getItemsByCategory(selectedCategory).length;
     setItemOffset(newOffset);
+  };
+
+  const handleAddToCart = (food) => {
+    if (user && user.email) {
+      console.log("adding data", food, user.email);
+      const foodItems = {
+        menuId: food._id,
+        email: user.email,
+        name: food.name,
+        price: food.price,
+        image: food.image,
+      };
+      console.log(foodItems);
+      axiosSecure.post("/carts", foodItems).then((res) => {
+        if (res?.data?.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your cart has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch();
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You are not Logged In!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes,login first! ",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
   };
 
   return (
@@ -79,7 +130,10 @@ const ShopCategory = () => {
                     <h2 className="card-title">{item.name}</h2>
                     <p>{item.recipe}</p>
                     <div className="items-center justify-center text-center">
-                      <button className="btn btn-outline border-0 border-b-2 border-yellow-400">
+                      <button
+                        onClick={() => handleAddToCart(item)}
+                        className="btn btn-outline border-0 border-b-2 border-yellow-400"
+                      >
                         Add to Cart
                       </button>
                     </div>

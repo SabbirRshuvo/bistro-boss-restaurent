@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import bg from "../assets/others/authentication2.png";
+import bg from "../../assets/others/authentication2.png";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
-import { AuthContext } from "../Provider/AuthProvider";
+import { AuthContext } from "../../Provider/AuthProvider";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { signInWithGoogle, signIn } = useContext(AuthContext);
@@ -28,11 +29,19 @@ const Login = () => {
     signIn(data.email, data.password)
       .then((result) => {
         const userData = result.user;
-        console.log(userData);
+        Swal.fire({
+          title: "Successfully login!!",
+          icon: "success",
+          draggable: true,
+        });
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.log("error", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       });
   };
 

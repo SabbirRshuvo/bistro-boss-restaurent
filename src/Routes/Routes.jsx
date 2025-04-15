@@ -1,14 +1,13 @@
 import { createBrowserRouter } from "react-router";
 import Main from "../MainLayout/Main";
-import OurMenu from "../Pages/OurMenu";
-import Home from "../Pages/Home";
-import OurShop from "../Pages/OurShop";
-import ContactUs from "../Pages/ContactUs";
-import Login from "../Pages/Login";
-import Register from "../Pages/Register";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import Secret from "../PrivateRoute/Secret";
-
+import OurMenu from "../Pages/HomePage/OurMenu";
+import Login from "../Pages/HomePage/Login";
+import Home from "../Pages/HomePage/Home";
+import OurShop from "../Pages/HomePage/OurShop";
+import ContactUs from "../Pages/HomePage/ContactUs";
+import Register from "../Pages/HomePage/Register";
+import Dashboard from "../MainLayout/Dashboard";
+import Cart from "../Pages/Dashboard/Cart";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -39,13 +38,16 @@ const routes = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />,
+    errorElement: "error",
+    children: [
       {
-        path: "/secret",
-        element: (
-          <PrivateRoute>
-            <Secret />
-          </PrivateRoute>
-        ),
+        path: "cart",
+        element: <Cart />,
       },
     ],
   },

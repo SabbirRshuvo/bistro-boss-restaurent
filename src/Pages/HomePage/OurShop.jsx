@@ -1,6 +1,6 @@
 import React from "react";
-import ShopBanner from "../ShopComponents/ShopBanner";
-import ShopCategory from "../ShopComponents/ShopCategory";
+import ShopBanner from "../../ShopComponents/ShopBanner";
+import ShopCategory from "../../ShopComponents/ShopCategory";
 
 const OurShop = () => {
   return (

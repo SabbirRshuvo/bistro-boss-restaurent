@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router";
-import cart from "../assets/icon/cart.png";
 import { AuthContext } from "../Provider/AuthProvider";
+import { FaCartArrowDown } from "react-icons/fa";
+import useCart from "../hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
   const links = (
     <>
       <li>
@@ -14,7 +16,7 @@ const Navbar = () => {
         <Link to="contact-us">Contact us</Link>
       </li>
       <li>
-        <Link>Dashboard</Link>
+        <Link to="/dashboard/cart">Dashboard</Link>
       </li>
       <li>
         <Link to="/menu">Our Menu</Link>
@@ -23,8 +25,11 @@ const Navbar = () => {
         <Link to="/our_shop">Our Shop</Link>
       </li>
       <li>
-        <Link>
-          <img className="h-8 rounded-full" src={cart} alt="" />
+        <Link to="/dashboard/cart">
+          <button className="btn badge-md badge-secondary">
+            <FaCartArrowDown />
+            {cart.length}
+          </button>
         </Link>
       </li>
     </>
@@ -34,7 +39,7 @@ const Navbar = () => {
     logOut();
   };
   return (
-    <div className="navbar fixed  z-10 bg-black/50  text-white  shadow-md uppercase max-w-7xl mx-auto ">
+    <div className="navbar fixed  z-10 bg-black/50  text-white  shadow-md uppercase max-w-7xl mx-auto items-center">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
