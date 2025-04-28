@@ -5,57 +5,98 @@ import bg from "../../assets/others/authentication2.png";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import Swal from "sweetalert2";
+import axios from "axios";
 const Register = () => {
-  const { createUser, signInWithGoogle, updateUserProfile } =
-    useContext(AuthContext);
-  const navigate = useNavigate();
+  const {
+    createUser,
+    updateUserProfile,
+    signInWithGoogle,
+    loading,
+    syncUserWithDatabase,
+  } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-    createUser(data.email, data.password)
-      .then((result) => {
-        const userData = result.user;
-        updateUserProfile(data.name, data.photoURL).then(() => {
-          Swal.fire({
-            title: "Successfully Sign Up!!",
-            icon: "success",
-            draggable: true,
-          });
-        });
-        console.log(userData);
-        navigate("/");
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-        });
+
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    try {
+      // Create Firebase user
+      const result = await createUser(data.email, data.password);
+
+      // Update user profile with name and photo
+      await updateUserProfile(data.name, data.photoURL);
+
+      // Create user in database
+      await syncUserWithDatabase({
+        displayName: data.name,
+        email: data.email,
       });
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Registration successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: error.message,
+        showConfirmButton: true,
+      });
+    }
   };
 
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+
+      // Sync Google user with database
+      await syncUserWithDatabase({
+        name: result.user.displayName,
+        email: result.user.email,
+        photoURL: result.user.photoURL,
+      });
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Google sign in successful!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       navigate("/");
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: error.message,
+        showConfirmButton: true,
+      });
     }
   };
 
   return (
     <div className="bg-gray-200 max-w-7xl h-[700px] mx-auto mt-10 justify-center items-center text-center flex gap-6">
-      <div className="w-1/2  ">
+      <div className="w-1/2">
         <div className="flex justify-center">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="bg-white p-8 rounded-xl shadow-lg w-full max-w-sm space-y-6"
           >
-            <h2 className="text-2xl font-bold text-center">Registar</h2>
+            <h2 className="text-2xl font-bold text-center">Register</h2>
 
             {/* Name Field */}
             <div>
@@ -63,12 +104,18 @@ const Register = () => {
                 <span className="label-text">Name</span>
               </label>
               <input
-                type="name"
-                {...register("name")}
+                type="text"
+                {...register("name", { required: "Name is required" })}
                 placeholder="name here"
                 className="input input-bordered w-full focus:outline-0"
               />
+              {errors.name && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
+
             {/* Email Field */}
             <div>
               <label className="label flex">
@@ -86,13 +133,15 @@ const Register = () => {
                 </p>
               )}
             </div>
+
+            {/* Photo URL Field */}
             <div>
               <label className="label flex">
-                <span className="label-text">Photo</span>
+                <span className="label-text">Photo URL</span>
               </label>
               <input
                 type="text"
-                {...register("photoURL", { required: "photoURL is required" })}
+                {...register("photoURL", { required: "Photo URL is required" })}
                 placeholder="url"
                 className="input input-bordered w-full focus:outline-0"
               />
@@ -126,11 +175,14 @@ const Register = () => {
                 </p>
               )}
             </div>
-            {/* captcha field */}
 
             {/* Submit Button */}
-            <button type="submit" className="btn btn-outline w-full">
-              Sign Up
+            <button
+              type="submit"
+              className="btn btn-outline w-full"
+              disabled={loading}
+            >
+              {loading ? "Processing..." : "Sign Up"}
             </button>
 
             {/* Additional Links */}
@@ -142,11 +194,12 @@ const Register = () => {
             </p>
           </form>
         </div>
-        <div className=" w-1/2 mx-auto gap-4 justify-around pt-8 space-y-2 ">
-          <p></p>
+        <div className="w-1/2 mx-auto gap-4 justify-around pt-8 space-y-2">
+          <p className="text-center font-medium">Or sign up with</p>
           <button
             onClick={handleGoogleSignIn}
             className="btn rounded-full w-full btn-outline"
+            disabled={loading}
           >
             <FaGoogle />
           </button>
@@ -159,7 +212,7 @@ const Register = () => {
         </div>
       </div>
       {/* image section */}
-      <div className="w-1/2  ">
+      <div className="w-1/2">
         <img src={bg} alt="" />
       </div>
     </div>

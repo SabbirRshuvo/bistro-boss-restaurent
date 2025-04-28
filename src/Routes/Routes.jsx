@@ -8,6 +8,8 @@ import ContactUs from "../Pages/HomePage/ContactUs";
 import Register from "../Pages/HomePage/Register";
 import Dashboard from "../MainLayout/Dashboard";
 import Cart from "../Pages/Dashboard/Cart";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AllUsers from "../Pages/Dashboard/AllUsers";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -19,35 +21,43 @@ const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/menu",
+        path: "menu",
         element: <OurMenu />,
       },
       {
-        path: "/our_shop",
+        path: "our_shop",
         element: <OurShop />,
       },
       {
-        path: "/contact-us",
+        path: "contact-us",
         element: <ContactUs />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
       {
-        path: "/register",
+        path: "register",
         element: <Register />,
       },
     ],
   },
   {
-    path: "dashboard",
-    element: <Dashboard />,
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     errorElement: "error",
     children: [
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "all-users",
+        element: <AllUsers />,
       },
     ],
   },

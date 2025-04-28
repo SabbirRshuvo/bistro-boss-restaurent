@@ -9,6 +9,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
@@ -34,7 +35,16 @@ const AuthProvider = ({ children }) => {
 
   const logOut = async () => {
     setLoading(true);
-    return signOut(auth);
+    try {
+      await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+        withCredentials: true,
+      });
+      await signOut(auth);
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const updateUserProfile = (name, photo) => {
@@ -44,15 +54,49 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  const syncUserWithDatabase = async (user) => {
+    if (!user?.email || !user?.displayName) return;
+    try {
+      // Save user info to DB
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/users`,
+        {
+          name: user.displayName,
+          email: user.email,
+        },
+        { withCredentials: true }
+      );
+
+      await axios
+        .post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          { email: user.email },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          if (res.data?.token) {
+            localStorage.setItem("access-token", res.data.token);
+          } else {
+            localStorage.removeItem("access-token");
+          }
+        });
+    } catch (error) {
+      console.error("Error syncing user with DB:", error);
+    }
+  };
+
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currenetUser) => {
-      setUser(currenetUser);
-      console.log("current user", currenetUser);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+      if (currentUser) {
+        await syncUserWithDatabase(currentUser);
+      }
+      console.log(currentUser);
       setLoading(false);
     });
-    return () => {
-      return unSubscribe();
-    };
+
+    return () => unsubscribe();
   }, []);
 
   const userInfo = {
@@ -63,6 +107,7 @@ const AuthProvider = ({ children }) => {
     signIn,
     logOut,
     updateUserProfile,
+    syncUserWithDatabase,
   };
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>

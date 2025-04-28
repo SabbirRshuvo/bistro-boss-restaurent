@@ -3,10 +3,9 @@ import SheardTitle from "../../Sheared/SheardTitle";
 import useCart from "../../hooks/useCart";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import axios from "axios";
 
 const Cart = () => {
-  const axiosSecure = useAxiosSecure();
   const [, refetch] = useCart();
   const [cart] = useCart();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
@@ -22,16 +21,18 @@ const Cart = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/carts/${id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-            refetch();
-          }
-        });
+        axios
+          .delete(`${import.meta.env.VITE_API_URL}/carts/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              refetch();
+            }
+          });
       }
     });
   };

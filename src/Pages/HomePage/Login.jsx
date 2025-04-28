@@ -12,7 +12,7 @@ import {
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signInWithGoogle, signIn } = useContext(AuthContext);
+  const { signInWithGoogle, signIn, user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const {

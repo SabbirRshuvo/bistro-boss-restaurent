@@ -5,12 +5,9 @@ import "react-tabs/style/react-tabs.css";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
-import useAxiosSecure from "../hooks/useAxiosSecure";
-import useCart from "../hooks/useCart";
+import axios from "axios";
 
 const ShopCategory = () => {
-  const axiosSecure = useAxiosSecure();
-  const [, refetch] = useCart();
   const { user } = useAuth();
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -25,13 +22,12 @@ const ShopCategory = () => {
   const location = useLocation();
 
   useEffect(() => {
-    fetch("http://localhost:3000/menu")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        const unique = ["All", ...new Set(data.map((item) => item.category))];
-        setCategories(unique);
-      });
+    axios.get(`${import.meta.env.VITE_API_URL}/menu`).then((res) => {
+      const data = res.data;
+      setData(data);
+      const unique = ["All", ...new Set(data.map((item) => item.category))];
+      setCategories(unique);
+    });
   }, []);
 
   const getItemsByCategory = (cat) => {
@@ -67,19 +63,20 @@ const ShopCategory = () => {
         price: food.price,
         image: food.image,
       };
-      console.log(foodItems);
-      axiosSecure.post("/carts", foodItems).then((res) => {
-        if (res?.data?.insertedId) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your cart has been saved",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          refetch();
-        }
-      });
+      axios
+        .post(`${import.meta.env.VITE_API_URL}/menu`, foodItems)
+        .then((res) => {
+          if (res?.data?.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your cart has been saved",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            refetch();
+          }
+        });
     } else {
       Swal.fire({
         title: "Are you sure?",

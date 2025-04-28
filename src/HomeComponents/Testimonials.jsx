@@ -8,14 +8,18 @@ import "swiper/css/navigation";
 import "@smastrom/react-rating/style.css";
 import { Navigation } from "swiper/modules";
 import { Rating } from "@smastrom/react-rating";
+import axios from "axios";
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/reviews")
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data);
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/reviews`)
+      .then((res) => {
+        setReviews(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching reviews:", error);
       });
   }, []);
   return (

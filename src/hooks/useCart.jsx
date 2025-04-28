@@ -1,15 +1,15 @@
-import React from "react";
-import useAxiosSecure from "./useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
+import axios from "axios";
 
 const useCart = () => {
-  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const { refetch, data: cart = [] } = useQuery({
     queryKey: ["cart", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/carts?email=${user.email}`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/carts?email=${user.email}`
+      );
       return res.data;
     },
   });
