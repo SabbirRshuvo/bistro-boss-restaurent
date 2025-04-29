@@ -1,9 +1,9 @@
 import React from "react";
-import SheardTitle from "../../Sheared/SheardTitle";
-import useCart from "../../hooks/useCart";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import axios from "axios";
+import SheardTitle from "../../../Sheared/SheardTitle";
+import useCart from "../../../hooks/useCart";
 
 const Cart = () => {
   const [, refetch] = useCart();

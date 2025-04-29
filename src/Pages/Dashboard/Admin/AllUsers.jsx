@@ -1,9 +1,9 @@
 import React from "react";
-import SheardTitle from "../../Sheared/SheardTitle";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaTrash, FaUser } from "react-icons/fa";
 import Swal from "sweetalert2";
+import SheardTitle from "../../../Sheared/SheardTitle";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();

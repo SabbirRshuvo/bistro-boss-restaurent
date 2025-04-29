@@ -7,9 +7,15 @@ import OurShop from "../Pages/HomePage/OurShop";
 import ContactUs from "../Pages/HomePage/ContactUs";
 import Register from "../Pages/HomePage/Register";
 import Dashboard from "../MainLayout/Dashboard";
-import Cart from "../Pages/Dashboard/Cart";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import AllUsers from "../Pages/Dashboard/AllUsers";
+import Cart from "../Pages/Dashboard/Admin/Cart";
+import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
+import AddItems from "../Pages/Dashboard/Admin/AddItems";
+import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
+import ManageBookings from "../Pages/Dashboard/Admin/ManageBookings";
+import ManageItems from "../Pages/Dashboard/Admin/ManageItems";
+import AdminRoute from "../AdminRoute/AdminRoute";
+import UpdateMenuItem from "../Pages/Dashboard/Admin/UpdateMenuItem";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -57,7 +63,54 @@ const routes = createBrowserRouter([
       },
       {
         path: "all-users",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "add-items",
+        element: (
+          <AdminRoute>
+            <AddItems />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "admin-home",
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
+      },
+
+      {
+        path: "manage-bookings",
+        element: (
+          <AdminRoute>
+            <ManageBookings />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-items",
+        element: (
+          <AdminRoute>
+            <ManageItems />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "updatedItem/:id",
+        element: (
+          <AdminRoute>
+            <UpdateMenuItem />
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/menu/${params.id}`),
       },
     ],
   },
