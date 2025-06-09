@@ -86,24 +86,6 @@ const Navbar = () => {
       <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      {/* <div className="navbar-end">
-        {user ? (
-          <div>
-            <button onClick={handleLogOut} className="btn">
-              Logout
-            </button>
-            <img
-              className={`h-10 w-10 rounded-full object-cover hovre:${user.displayName}`}
-              src={user.photoURL}
-              alt=""
-            />
-          </div>
-        ) : (
-          <Link to="/login" className="btn">
-            Login
-          </Link>
-        )}
-      </div> */}
       {user ? (
         <div className="dropdown dropdown-end">
           <div
