@@ -4,7 +4,7 @@
 
 ###  Live Link
 
- [Visit Bistro Boss Live]([https://your-live-site-link.com](https://bistro-boss-restaurant-82b3f.web.app/))
+ [https://bistro-boss-restaurant-82b3f.web.app/]
 
 ---
 
