@@ -36,7 +36,7 @@ const AddItems = () => {
           image: imageUrl,
         };
 
-        const res = await axiosSecure.post("/menu", recipeData);
+        const res = await axiosSecure.post("/menu/admin", recipeData);
         if (res.data.insertedId) {
           Swal.fire({
             position: "top-end",

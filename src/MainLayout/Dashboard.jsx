@@ -87,7 +87,7 @@ const Dashboard = () => {
           ) : (
             <>
               <NavLink
-                to="/"
+                to="/dashboard/user-home"
                 className={({ isActive }) =>
                   `flex items-center gap-3 text-md uppercase font-semibold ${
                     isActive ? "text-white" : "text-black"
@@ -98,7 +98,7 @@ const Dashboard = () => {
               </NavLink>
 
               <NavLink
-                to="/reservation"
+                to="/dashboard/user-reservation"
                 className={({ isActive }) =>
                   `flex items-center gap-3 text-md uppercase font-semibold ${
                     isActive ? "text-white" : "text-black"
@@ -109,7 +109,7 @@ const Dashboard = () => {
               </NavLink>
 
               <NavLink
-                to="/payment"
+                to="/dashboard/payment-history"
                 className={({ isActive }) =>
                   `flex items-center gap-3 text-md uppercase font-semibold ${
                     isActive ? "text-white" : "text-black"
@@ -120,7 +120,7 @@ const Dashboard = () => {
               </NavLink>
 
               <NavLink
-                to="/dashboard/cart"
+                to="/dashboard/my-cart"
                 className={({ isActive }) =>
                   `flex items-center gap-3 text-md uppercase font-semibold ${
                     isActive ? "text-white" : "text-black"
@@ -131,7 +131,7 @@ const Dashboard = () => {
               </NavLink>
 
               <NavLink
-                to="/review"
+                to="/dashboard/add-review"
                 className={({ isActive }) =>
                   `flex items-center gap-3 text-md uppercase font-semibold ${
                     isActive ? "text-white" : "text-black"
@@ -142,7 +142,7 @@ const Dashboard = () => {
               </NavLink>
 
               <NavLink
-                to="/booking"
+                to="/dashboard/my-booking"
                 className={({ isActive }) =>
                   `flex items-center gap-3 text-md uppercase font-semibold ${
                     isActive ? "text-white" : "text-black"
@@ -181,7 +181,7 @@ const Dashboard = () => {
           </NavLink>
 
           <NavLink
-            to="/shop"
+            to="/our_shop"
             className={({ isActive }) =>
               `flex items-center gap-3 text-md uppercase font-semibold ${
                 isActive ? "text-white" : "text-black"
@@ -192,7 +192,7 @@ const Dashboard = () => {
           </NavLink>
 
           <NavLink
-            to="/contact"
+            to="/contact-us"
             className={({ isActive }) =>
               `flex items-center gap-3 text-md uppercase font-semibold ${
                 isActive ? "text-white" : "text-black"

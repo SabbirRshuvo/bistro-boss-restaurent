@@ -6,9 +6,11 @@ import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
+import useCart from "../hooks/useCart";
 
 const ShopCategory = () => {
   const { user } = useAuth();
+  const [, refetch] = useCart();
   const [data, setData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -64,7 +66,7 @@ const ShopCategory = () => {
         image: food.image,
       };
       axios
-        .post(`${import.meta.env.VITE_API_URL}/menu`, foodItems)
+        .post(`${import.meta.env.VITE_API_URL}/carts`, foodItems)
         .then((res) => {
           if (res?.data?.insertedId) {
             Swal.fire({

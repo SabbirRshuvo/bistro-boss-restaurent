@@ -3,20 +3,22 @@ import { Link } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { FaCartArrowDown } from "react-icons/fa";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
   const links = (
     <>
       <li>
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="contact-us">Contact us</Link>
+        <Link to="/contact-us">Contact us</Link>
       </li>
       <li>
-        <Link to="/dashboard/cart">Dashboard</Link>
+        <Link to="/dashboard/my-cart">Dashboard</Link>
       </li>
       <li>
         <Link to="/menu">Our Menu</Link>
@@ -25,12 +27,22 @@ const Navbar = () => {
         <Link to="/our_shop">Our Shop</Link>
       </li>
       <li>
-        <Link to="/dashboard/cart">
-          <button className="btn badge-md badge-secondary">
-            <FaCartArrowDown />
-            {cart.length}
-          </button>
-        </Link>
+        {user && isAdmin && (
+          <Link to="/dashboard/admin-home">
+            <button className="btn badge-md badge-secondary">
+              <FaCartArrowDown />
+              {cart.length}
+            </button>
+          </Link>
+        )}
+        {user && !isAdmin && (
+          <Link to="/dashboard/user-home">
+            <button className="btn badge-md badge-secondary">
+              <FaCartArrowDown />
+              {cart.length}
+            </button>
+          </Link>
+        )}
       </li>
     </>
   );

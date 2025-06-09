@@ -25,13 +25,10 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      // Create Firebase user
       const result = await createUser(data.email, data.password);
 
-      // Update user profile with name and photo
       await updateUserProfile(data.name, data.photoURL);
 
-      // Create user in database
       await syncUserWithDatabase({
         displayName: data.name,
         email: data.email,

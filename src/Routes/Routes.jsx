@@ -8,7 +8,6 @@ import ContactUs from "../Pages/HomePage/ContactUs";
 import Register from "../Pages/HomePage/Register";
 import Dashboard from "../MainLayout/Dashboard";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
-import Cart from "../Pages/Dashboard/Admin/Cart";
 import AllUsers from "../Pages/Dashboard/Admin/AllUsers";
 import AddItems from "../Pages/Dashboard/Admin/AddItems";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
@@ -16,6 +15,12 @@ import ManageBookings from "../Pages/Dashboard/Admin/ManageBookings";
 import ManageItems from "../Pages/Dashboard/Admin/ManageItems";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import UpdateMenuItem from "../Pages/Dashboard/Admin/UpdateMenuItem";
+import MyCart from "../Pages/Dashboard/User/MyCart";
+import UserHome from "../Pages/Dashboard/User/UserHome";
+import UserReservation from "../Pages/Dashboard/User/UserReservation";
+import PaymentHistory from "../Pages/Dashboard/User/PaymentHistory";
+import AddReview from "../Pages/Dashboard/User/AddReview";
+import MyBookings from "../Pages/Dashboard/User/MyBookings";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -57,10 +62,6 @@ const routes = createBrowserRouter([
     ),
     errorElement: "error",
     children: [
-      {
-        path: "cart",
-        element: <Cart />,
-      },
       {
         path: "all-users",
         element: (
@@ -110,7 +111,33 @@ const routes = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/menu/${params.id}`),
+          fetch(
+            `https://bistro-boss-restaurent-server-nine.vercel.app/menu/${params.id}`
+          ),
+      },
+      {
+        path: "my-cart",
+        element: <MyCart />,
+      },
+      {
+        path: "user-home",
+        element: <UserHome />,
+      },
+      {
+        path: "user-reservation",
+        element: <UserReservation />,
+      },
+      {
+        path: "payment-history",
+        element: <PaymentHistory />,
+      },
+      {
+        path: "add-review",
+        element: <AddReview />,
+      },
+      {
+        path: "my-booking",
+        element: <MyBookings />,
       },
     ],
   },
